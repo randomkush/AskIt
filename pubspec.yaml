@@ -45,6 +45,8 @@ dependencies:
   firebase_auth: ^4.1.0
   google_sign_in: ^5.4.2
   google_fonts: ^3.0.1
+  fpdart: ^0.3.0
+  routemaster: ^1.0.1
 
 dev_dependencies:
   flutter_test:
