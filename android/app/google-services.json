@@ -22,6 +22,22 @@
           }
         },
         {
+          "client_id": "639897394509-hggtesviomdcjhn66mfmj4fvrl9ppjv0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "devs.KUK.askIT",
+            "certificate_hash": "ecf8ff7755b5969aff6676f8349097750f11eb2e"
+          }
+        },
+        {
+          "client_id": "639897394509-l5ieeam9uptlcljc5720him2m30rdk1n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "devs.KUK.askIT",
+            "certificate_hash": "d9ddb6b7f91ca88966f6462006c92bcecc621440"
+          }
+        },
+        {
           "client_id": "639897394509-39eki08jh0qhnd8okd8d4md4hkhkh8bk.apps.googleusercontent.com",
           "client_type": 3
         }
