@@ -15,6 +15,7 @@ class Pallete {
   static const deepPurple = Colors.deepPurple;
   static var redColor = Colors.red.shade500;
   static var blueColor = Colors.blue.shade300;
+  static var tileColor = Colors.grey.shade400;
 
   // Themes
   static var darkModeAppTheme = ThemeData.dark().copyWith(

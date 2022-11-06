@@ -1,5 +1,5 @@
 import 'package:ask_it/controller/auth.dart';
-import 'package:ask_it/pages/home/drawer/drawer.dart';
+import 'package:ask_it/pages/home/drawer/community_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -12,7 +12,7 @@ class HomeScreen extends ConsumerWidget {
     final user = ref.watch(userProvider)!;
 
     return Scaffold(
-      drawer: const DrawerScreen(),
+      drawer: const CommuntiyListDrawer(),
       appBar: AppBar(
         title: const Center(child: Text('Home')),
         actions: <Widget>[
@@ -26,9 +26,8 @@ class HomeScreen extends ConsumerWidget {
             },
           ),
           IconButton(
-            icon: const Icon(
-              FontAwesomeIcons.userNinja,
-              size: 20,
+            icon: CircleAvatar(
+              backgroundImage: NetworkImage(user.profilePic),
             ),
             onPressed: () {
               // do something
