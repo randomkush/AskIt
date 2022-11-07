@@ -1,5 +1,5 @@
-import 'package:ask_it/controller/auth.dart';
 import 'package:ask_it/controller/community.dart';
+import 'package:ask_it/models/community.dart';
 import 'package:ask_it/pages/common/error.dart';
 import 'package:ask_it/pages/common/loader.dart';
 import 'package:flutter/material.dart';
@@ -14,10 +14,12 @@ class CommuntiyListDrawer extends ConsumerWidget {
     Routemaster.of(context).push('/create-community');
   }
 
+  void navigateToCommunity(BuildContext context, Community community) {
+    Routemaster.of(context).push('/r/${community.name}');
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(userProvider)!;
-
     return Drawer(
       child: SafeArea(
         child: Column(
@@ -39,7 +41,9 @@ class CommuntiyListDrawer extends ConsumerWidget {
                         backgroundImage: NetworkImage(community.avatar),
                       ),
                       title: Text('r/${community.name}'),
-                      onTap: () {},
+                      onTap: () {
+                        navigateToCommunity(context, community);
+                      },
                     );
                   },
                 ),

@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:ask_it/controller/auth.dart';
 import 'package:ask_it/core/constants/constants.dart';
+import 'package:ask_it/core/providers/storage.dart';
 import 'package:ask_it/core/utils.dart';
 import 'package:ask_it/models/community.dart';
 import 'package:ask_it/services/community.dart';
@@ -14,19 +17,28 @@ final userCommunitiesProvider = StreamProvider((ref) {
 
 final communityControllerProvider = StateNotifierProvider<CommunityController, bool>((ref) {
   final communityServices = ref.watch(communityServicesProvider);
+  final storageServices = ref.watch(storageServicesProvider);
   return CommunityController(
     communityServices: communityServices, 
+    storageServices: storageServices,
     ref: ref
   );
 });
 
+final getCommunityByNameProvider = StreamProvider.family((ref, String name) {
+  return ref.watch(communityControllerProvider.notifier).getCommunityByName(name);
+});
+
 class CommunityController extends StateNotifier<bool> {
   final CommunityServices _communityServices;
+  final StorageServices _storageServices;
   final Ref _ref;
   CommunityController({
     required CommunityServices communityServices,
     required Ref ref,
+    required StorageServices storageServices
   }): _communityServices = communityServices,
+      _storageServices = storageServices,
       _ref = ref,
       super(false);
 
@@ -57,5 +69,47 @@ class CommunityController extends StateNotifier<bool> {
   Stream<List<Community>> getUserCommunities() {
     final uid = _ref.read(userProvider)!.uid;
     return _communityServices.getUserCommunities(uid);
+  }
+
+  Stream<Community> getCommunityByName(String name) {
+    return _communityServices.getCommunityByName(name);
+  } 
+
+  void editCommunity({
+    required File? profileFile, 
+    required File? bannerFile, 
+    required Community community,
+    required BuildContext context,
+  }) async {
+    state = true;
+    if (profileFile != null) {
+      final res = await _storageServices.storeFile(
+        path: 'communities/profile', 
+        id: community.name, 
+        file: profileFile,
+      );
+      res.fold(
+        (l) => showSnackBar(context, l.message), 
+        (r) => community = community.copyWith(avatar: r),
+      );
+    }
+    if (bannerFile != null) {
+      final res = await _storageServices.storeFile(
+        path: 'communities/banner', 
+        id: community.name, 
+        file: bannerFile,
+      );
+      res.fold(
+        (l) => showSnackBar(context, l.message), 
+        (r) => community = community.copyWith(banner: r),
+      );
+    }
+
+    final res = await _communityServices.editCommunity(community);
+    state = false;
+    res.fold(
+      (l) => showSnackBar(context, l.message), 
+      (r) => Routemaster.of(context).pop(),
+    );
   }
 }
