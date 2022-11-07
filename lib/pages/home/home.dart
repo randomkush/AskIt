@@ -1,4 +1,5 @@
 import 'package:ask_it/controller/auth.dart';
+import 'package:ask_it/pages/delegates/search_community.dart';
 import 'package:ask_it/pages/home/drawer/community_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,11 +19,14 @@ class HomeScreen extends ConsumerWidget {
         actions: <Widget>[
           IconButton(
             icon: const Icon(
-              FontAwesomeIcons.searchengin,
+              FontAwesomeIcons.magnifyingGlass,
               size: 20,
             ),
             onPressed: () {
-              // do something
+              showSearch(
+                context: context, 
+                delegate: SearchCommunityDelegate(ref),
+              );
             },
           ),
           IconButton(
