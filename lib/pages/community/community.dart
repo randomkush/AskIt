@@ -1,5 +1,6 @@
 import 'package:ask_it/controller/auth.dart';
 import 'package:ask_it/controller/community.dart';
+import 'package:ask_it/models/community.dart';
 import 'package:ask_it/pages/common/error.dart';
 import 'package:ask_it/pages/common/loader.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,10 @@ class CommunityScreen extends ConsumerWidget {
 
   void navigateToModTools(BuildContext context) {
     Routemaster.of(context).push('/mod-tools/$name');
+  }
+
+  void joinCommunity(WidgetRef ref, Community community, BuildContext context) {
+    ref.read(communityControllerProvider.notifier).joinCommunity(community, context);
   }
 
   @override
@@ -65,9 +70,7 @@ class CommunityScreen extends ConsumerWidget {
                         ),
                         community.mods.contains(user.uid) ?
                           OutlinedButton(
-                            onPressed: () {
-                              navigateToModTools(context);
-                            },
+                            onPressed: () => navigateToModTools(context),
                             style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20),
@@ -77,7 +80,7 @@ class CommunityScreen extends ConsumerWidget {
                             child: const Text('Mod Tools'),
                           ) :
                           OutlinedButton(
-                            onPressed: () {},
+                            onPressed: () => joinCommunity(ref, community, context),
                             style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20),
