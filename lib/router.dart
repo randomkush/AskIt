@@ -1,3 +1,4 @@
+import 'package:ask_it/pages/community/add_mods.dart';
 import 'package:ask_it/pages/community/community.dart';
 import 'package:ask_it/pages/community/create.dart';
 import 'package:ask_it/pages/community/edit.dart';
@@ -29,6 +30,11 @@ final loggedInRoute = RouteMap(
     ),
     '/edit-community/:name': (route) => MaterialPage(
       child: EditCommunityScreen(
+        name: route.pathParameters['name']!,
+      ),
+    ),
+    '/add-mods/:name': (route) => MaterialPage(
+      child: AddModsScreen(
         name: route.pathParameters['name']!,
       ),
     ),
