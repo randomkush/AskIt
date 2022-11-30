@@ -4,11 +4,9 @@ import 'package:ask_it/controller/auth.dart';
 import 'package:ask_it/core/constants/constants.dart';
 import 'package:ask_it/core/failure.dart';
 import 'package:ask_it/core/providers/storage.dart';
-import 'package:ask_it/core/typedefs.dart';
 import 'package:ask_it/core/utils.dart';
 import 'package:ask_it/models/community.dart';
 import 'package:ask_it/services/community.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
@@ -19,7 +17,7 @@ final userCommunitiesProvider = StreamProvider((ref) {
   return communityController.getUserCommunities();
 });
 
-final communityControllerProvider = StateNotifierProvider<CommunityController, bool>((ref) {
+final communityControllerProvider = StateNotifierProvider<CommunityController,bool>((ref) {
   final communityServices = ref.watch(communityServicesProvider);
   final storageServices = ref.watch(storageServicesProvider);
   return CommunityController(
@@ -145,5 +143,13 @@ class CommunityController extends StateNotifier<bool> {
 
   Stream<List<Community>> searchCommunity(String query) {
     return _communityServices.searchCommunity(query);
+  }
+
+  void addMods(String communityName, List<String> uids, BuildContext context) async {
+    final res = await _communityServices.addMods(communityName, uids);
+    res.fold(
+      (l) => showSnackBar(context, l.message), 
+      (r) => Routemaster.of(context).pop(),
+    );
   }
 }

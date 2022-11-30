@@ -17,7 +17,7 @@ class SearchCommunityDelegate extends SearchDelegate {
         onPressed: () {
           query = '';
         },
-        icon: Icon(FontAwesomeIcons.xmark),
+        icon: const Icon(FontAwesomeIcons.xmark),
       ),
     ];
   }

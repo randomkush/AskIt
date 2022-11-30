@@ -2,12 +2,17 @@ import 'package:ask_it/controller/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:routemaster/routemaster.dart';
 
 class ProfileDrawer extends ConsumerWidget {
   const ProfileDrawer({super.key});
 
   void logout(WidgetRef ref) {
     ref.read(authControllerProvider.notifier).logout();
+  }
+
+  void navigateToUserProfile(BuildContext context, String uid) {
+    Routemaster.of(context).push('u/$uid');
   }
 
   @override
@@ -36,7 +41,7 @@ class ProfileDrawer extends ConsumerWidget {
             ListTile(
               title: const Text('My Profile'),
               leading: const Icon(FontAwesomeIcons.person),
-              onTap: () {},
+              onTap: () => navigateToUserProfile(context, user.uid),
             ),
             ListTile(
               title: const Text('Log Out'),

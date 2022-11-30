@@ -66,11 +66,11 @@ class _EditCommunityScreenState extends ConsumerState<EditCommunityScreen> {
           title: const Text('Edit Community'),
           centerTitle: false,
           actions: [
-            TextButton(
+            IconButton(
               onPressed: () => save(community), 
-              child: const Text('Save'),
+              icon: const Icon(FontAwesomeIcons.floppyDisk),
             ),
-          ],
+          ],  
         ),
         body: isLoading ?
             const Loader() :

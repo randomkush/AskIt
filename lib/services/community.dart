@@ -1,3 +1,5 @@
+// ignore_for_file: void_checks
+
 import 'package:ask_it/core/constants/firebase.dart';
 import 'package:ask_it/core/failure.dart';
 import 'package:ask_it/core/providers/firebase.dart';
@@ -102,6 +104,18 @@ class CommunityServices {
         }
       );
   } 
+
+  FutureVoid addMods(String communityName, List<String> uids) async {
+    try {
+      return right(_communities.doc(communityName).update({
+        'mods': uids,
+      }));
+    } on FirebaseException catch (e) {
+      throw e.message!;
+    } catch (e) {
+      return left(Failure(e.toString()));
+    }
+  }
 
   CollectionReference get _communities => _firestore.collection(FirebaseConstants.communitiesCollection);
 }

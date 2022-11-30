@@ -5,6 +5,8 @@ import 'package:ask_it/pages/community/edit.dart';
 import 'package:ask_it/pages/community/mod_tools.dart';
 import 'package:ask_it/pages/home/home.dart';
 import 'package:ask_it/pages/login/login.dart';
+import 'package:ask_it/pages/user/edit.dart';
+import 'package:ask_it/pages/user/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:routemaster/routemaster.dart';
 
@@ -36,6 +38,16 @@ final loggedInRoute = RouteMap(
     '/add-mods/:name': (route) => MaterialPage(
       child: AddModsScreen(
         name: route.pathParameters['name']!,
+      ),
+    ),
+    '/u/:uid': (route) => MaterialPage(
+      child: UserProfileScreen(
+        uid: route.pathParameters['uid']!,
+      ),
+    ),
+    '/edit-profile/:uid': (route) => MaterialPage(
+      child: EditProfileScreen(
+        uid: route.pathParameters['uid']!,
       ),
     ),
   }
