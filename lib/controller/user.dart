@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:ask_it/controller/auth.dart';
 import 'package:ask_it/core/utils.dart';
-import 'package:ask_it/models/community.dart';
 import 'package:ask_it/models/user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

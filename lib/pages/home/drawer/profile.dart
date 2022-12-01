@@ -1,4 +1,5 @@
 import 'package:ask_it/controller/auth.dart';
+import 'package:ask_it/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -13,6 +14,10 @@ class ProfileDrawer extends ConsumerWidget {
 
   void navigateToUserProfile(BuildContext context, String uid) {
     Routemaster.of(context).push('u/$uid');
+  }
+
+  void toggleTheme(WidgetRef ref) {
+    ref.read(themeNotifierProvider.notifier).toggleTheme();
   }
 
   @override
@@ -49,8 +54,8 @@ class ProfileDrawer extends ConsumerWidget {
               onTap: () => logout(ref),
             ),
             Switch.adaptive(
-              value: true, 
-              onChanged: (val) {},
+              value: ref.watch(themeNotifierProvider.notifier).mode == ThemeMode.dark, 
+              onChanged: (val) => toggleTheme(ref),
             ),
           ],
         ),
