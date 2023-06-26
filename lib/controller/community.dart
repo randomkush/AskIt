@@ -42,7 +42,7 @@ class CommunityController extends StateNotifier<bool> {
   CommunityController({
     required CommunityServices communityServices,
     required Ref ref,
-    required StorageServices storageServices
+    required StorageServices storageServices,
   }): _communityServices = communityServices,
       _storageServices = storageServices,
       _ref = ref,

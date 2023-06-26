@@ -42,7 +42,7 @@ class CommunityServices {
     } on FirebaseException catch (e) {
       throw e.message!;
     } catch (e) {
-      return right(Failure(e.toString()));
+      return left(Failure(e.toString()));
     }
   }
 
@@ -54,7 +54,7 @@ class CommunityServices {
     } on FirebaseException catch (e) {
       throw e.message!;
     } catch (e) {
-      return right(Failure(e.toString()));
+      return left(Failure(e.toString()));
     }
   }
 

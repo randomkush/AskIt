@@ -1,5 +1,6 @@
 import 'package:ask_it/pages/feed/feed.dart';
 import 'package:ask_it/pages/post/add.dart';
+import 'package:flutter/material.dart';
 
 class Constants {
   static const logoPath = 'assets/images/logo.png';
@@ -13,4 +14,7 @@ class Constants {
     FeedScreen(),
     AddPostScreen(),
   ];
+
+  static const IconData up = IconData(0xe800, fontFamily: 'MyFlutterApp', fontPackage: null);
+  static const IconData down = IconData(0xe801, fontFamily: 'MyFlutterApp', fontPackage: null);
 }

@@ -5,6 +5,7 @@ import 'package:ask_it/pages/community/edit.dart';
 import 'package:ask_it/pages/community/mod_tools.dart';
 import 'package:ask_it/pages/home/home.dart';
 import 'package:ask_it/pages/login/login.dart';
+import 'package:ask_it/pages/post/add_type.dart';
 import 'package:ask_it/pages/user/edit.dart';
 import 'package:ask_it/pages/user/profile.dart';
 import 'package:flutter/material.dart';
@@ -48,6 +49,11 @@ final loggedInRoute = RouteMap(
     '/edit-profile/:uid': (route) => MaterialPage(
       child: EditProfileScreen(
         uid: route.pathParameters['uid']!,
+      ),
+    ),
+    '/add-post/:type': (route) => MaterialPage(
+      child: AddPostTypeScreen(
+        type: route.pathParameters['type']!,
       ),
     ),
   }
